@@ -1,10 +1,10 @@
 {
-  "name": "jsbook",
+  "name": "local-client",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite --port 3000",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

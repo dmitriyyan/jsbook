@@ -25,7 +25,7 @@ const Resizable = ({
       if (timer) {
         clearTimeout(timer);
       }
-      timer = setTimeout(() => {
+      timer = window.setTimeout(() => {
         setHeight(window.innerHeight);
         setWidth(window.innerWidth);
 

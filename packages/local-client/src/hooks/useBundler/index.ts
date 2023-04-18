@@ -51,7 +51,7 @@ const useBundler = (input: string) => {
       if (input === '') {
         void handleBundle(input);
       } else {
-        timer = setTimeout(() => {
+        timer = window.setTimeout(() => {
           void handleBundle(input);
         }, 1000);
       }
