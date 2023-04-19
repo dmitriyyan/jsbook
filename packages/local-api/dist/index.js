@@ -9,7 +9,9 @@ const http_proxy_middleware_1 = require("http-proxy-middleware");
 const cells_1 = __importDefault(require("./routes/cells"));
 const serve = (port, filename, dir) => {
     const app = (0, express_1.default)();
-    if (process.env.NODE_ENV === 'development') {
+    app.use((0, cells_1.default)(filename, dir));
+    if (process.env.NODE_ENV === undefined ||
+        process.env.NODE_ENV === 'development') {
         app.use((0, http_proxy_middleware_1.createProxyMiddleware)({
             target: 'http://localhost:3000',
             ws: true,
@@ -20,7 +22,6 @@ const serve = (port, filename, dir) => {
         const packagePath = require.resolve('local-client/dist/index.html');
         app.use(express_1.default.static(path_1.default.dirname(packagePath)));
     }
-    app.use((0, cells_1.default)(filename, dir));
     app
         .listen(port, () => {
         console.log(`${filename} is served on http://localhost:${port}`);

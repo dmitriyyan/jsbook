@@ -6,7 +6,12 @@ import creatCellsRoute from './routes/cells';
 const serve = (port: number, filename: string, dir: string) => {
   const app = express();
 
-  if (process.env.NODE_ENV === 'development') {
+  app.use(creatCellsRoute(filename, dir));
+
+  if (
+    process.env.NODE_ENV === undefined ||
+    process.env.NODE_ENV === 'development'
+  ) {
     app.use(
       createProxyMiddleware({
         target: 'http://localhost:3000',
@@ -18,8 +23,6 @@ const serve = (port: number, filename: string, dir: string) => {
     const packagePath = require.resolve('local-client/dist/index.html');
     app.use(express.static(path.dirname(packagePath)));
   }
-
-  app.use(creatCellsRoute(filename, dir));
 
   app
     .listen(port, () => {
